@@ -44,6 +44,14 @@ public class BankOCR {
         return bankAccounts;
     }
 
+    public boolean isValid(String bankAccount) {
+        int checkSum = 0;
+        for (int i = bankAccount.length() - 1; i > 0; i--) {
+            checkSum += Integer.parseInt(bankAccount.charAt(i) + "") * (i + 1);
+        }
+        return checkSum % 11 == 0;
+    }
+
     private String obtainBankAccount(List<String> lines) {
         String firstLine = lines.remove(0);
         String secondLine = lines.remove(0);
