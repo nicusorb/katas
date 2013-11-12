@@ -6,7 +6,6 @@ import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.contains;
-import static org.hamcrest.Matchers.is;
 
 public class BankOCRTest {
     private BankOCR bankOCR = new BankOCR();
@@ -51,16 +50,5 @@ public class BankOCRTest {
         List<String> bankAccounts = bankOCR.obtainBankAccounts("../multipleRows.txt");
 
         assertThat(bankAccounts, contains("123451234", "000000000"));
-    }
-
-    @Test
-    public void onValidBankAccount_returnTrue() throws Exception {
-        assertThat(bankOCR.isValid("000000000"), is(true));
-        assertThat(bankOCR.isValid("011111111"), is(true));
-    }
-
-    @Test
-    public void onInvalidBankAccount_returnFalse() throws Exception {
-        assertThat(bankOCR.isValid("111111111"), is(true));
     }
 }

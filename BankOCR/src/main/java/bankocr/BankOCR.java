@@ -21,18 +21,10 @@ public class BankOCR {
         List<String> lines = readAllLinesFromFile(fileName);
         List<String> bankAccounts = new ArrayList<>();
 
-        while (lines.size() > 0) {
+        while (!lines.isEmpty()) {
             bankAccounts.add(obtainBankAccount(lines));
         }
         return bankAccounts;
-    }
-
-    public boolean isValid(String bankAccount) {
-        int checkSum = 0;
-        for (int i = bankAccount.length() - 1; i > 0; i--) {
-            checkSum += Integer.parseInt(bankAccount.charAt(i) + "") * (i + 1);
-        }
-        return checkSum % 11 == 0;
     }
 
     private String obtainBankAccount(List<String> lines) {
@@ -42,7 +34,7 @@ public class BankOCR {
         removeNextEmptyLineIfPresent(lines);
 
         String bankAccount = "";
-        while (firstLine.length() > 0) {
+        while (!firstLine.isEmpty()) {
             String ocrNumber = obtainFirstNumberRepresentation(firstLine, secondLine, thirdLine);
 
             bankAccount += ocrNumberToRealNumber.get(ocrNumber);
@@ -55,7 +47,7 @@ public class BankOCR {
     }
 
     private void removeNextEmptyLineIfPresent(List<String> lines) {
-        if (lines.size() > 0 && lines.get(0).equals(""))
+        if (!lines.isEmpty() && lines.get(0).equals(""))
             lines.remove(0);
     }
 
