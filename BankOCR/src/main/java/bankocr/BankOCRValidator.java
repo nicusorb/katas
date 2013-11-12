@@ -10,6 +10,8 @@ public class BankOCRValidator {
     }
 
     public boolean isValidBankAccount(String bankAccount) {
-        return false;  //To change body of created methods use File | Settings | File Templates.
+        if (bankAccount.contains("?"))
+            return false;
+        return true;
     }
 }

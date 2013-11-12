@@ -14,11 +14,13 @@ public class BankAccountsFormatter {
         List<String> formattedBankAccounts = new ArrayList<>();
 
         for (String bankAccount : bankAccounts) {
-            if (!validator.isValidChecksum(bankAccount)) {
-                formattedBankAccounts.add(bankAccount + " ERR");
-            } else if (!validator.isValidBankAccount(bankAccount)) {
-                formattedBankAccounts.add(bankAccount);
+            String err = "";
+            if (!validator.isValidBankAccount(bankAccount)) {
+                err = " ILL";
+            } else if (!validator.isValidChecksum(bankAccount)) {
+                err = " ERR";
             }
+            formattedBankAccounts.add(bankAccount + err);
         }
 
         return formattedBankAccounts;
