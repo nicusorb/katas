@@ -44,12 +44,14 @@ public class GameOfLife {
 
         for (int i = -1; i <= 1; i++)
             for (int j = -1; j <= 1; j++)
-                if (i == 0 && j == 0)
-                    continue;
-                else if (isCellAlive(x + i, y + j))
+                if (!isCurrentCell(i, j) && isCellAlive(x + i, y + j))
                     nbOfAliveNeighbours++;
 
         return nbOfAliveNeighbours;
+    }
+
+    private boolean isCurrentCell(int i, int j) {
+        return i == 0 && j == 0;
     }
 
     private boolean isCellAlive(int x, int y) {
