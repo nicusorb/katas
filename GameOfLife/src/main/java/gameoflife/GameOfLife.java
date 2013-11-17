@@ -1,5 +1,7 @@
 package gameoflife;
 
+import java.util.Arrays;
+
 public class GameOfLife {
     private final boolean[][] cells;
 
@@ -12,15 +14,27 @@ public class GameOfLife {
     }
 
     public boolean[][] nextGeneration() {
+        boolean[][] newCells = cloneCells();
+
         for (int i = 0; i < cells.length; i++) {
             for (int j = 0; j < cells[i].length; j++) {
                 int nbOfLiveNeighbours = getNumberOfAliveNeighbours(i, j);
 
-                if (nbOfLiveNeighbours == 0 && cells[i][j])
-                    cells[i][j] = false;
+                if (nbOfLiveNeighbours < 2 && cells[i][j]) //underpopulation
+                    newCells[i][j] = false;
+                else if (nbOfLiveNeighbours > 3 && cells[i][j]) //overcrowding
+                    newCells[i][j] = false;
             }
         }
-        return cells;
+        return newCells;
+    }
+
+    private boolean[][] cloneCells() {
+        boolean newCells[][] = new boolean[cells.length][cells.length];
+        for (int i = 0; i < cells.length; i++) {
+            newCells[i] = Arrays.copyOf(cells[i], cells[i].length);
+        }
+        return newCells;
     }
 
     private int getNumberOfAliveNeighbours(int x, int y) {
@@ -41,6 +55,6 @@ public class GameOfLife {
     }
 
     private boolean isValidPosition(int pos) {
-        return pos > 0 && pos < cells.length - 1;
+        return pos >= 0 && pos <= cells.length - 1;
     }
 }
