@@ -20,10 +20,12 @@ public class GameOfLife {
             for (int j = 0; j < cells[i].length; j++) {
                 int nbOfLiveNeighbours = getNumberOfAliveNeighbours(i, j);
 
-                if (nbOfLiveNeighbours < 2 && cells[i][j]) //underpopulation
+                if (aliveCellUnderpopulated(cells[i][j], nbOfLiveNeighbours))
                     newCells[i][j] = false;
-                else if (nbOfLiveNeighbours > 3 && cells[i][j]) //overcrowding
+                else if (aliveCellOvercrowded(cells[i][j], nbOfLiveNeighbours))
                     newCells[i][j] = false;
+                else if (deadCellWith3AliveNeighbours(cells[i][j], nbOfLiveNeighbours))
+                    newCells[i][j] = true;
             }
         }
         return newCells;
@@ -56,5 +58,17 @@ public class GameOfLife {
 
     private boolean isValidPosition(int pos) {
         return pos >= 0 && pos <= cells.length - 1;
+    }
+
+    private boolean aliveCellUnderpopulated(boolean cell, int nbOfLiveNeighbours) {
+        return nbOfLiveNeighbours < 2 && cell;
+    }
+
+    private boolean aliveCellOvercrowded(boolean cell, int nbOfLiveNeighbours) {
+        return nbOfLiveNeighbours > 3 && cell;
+    }
+
+    private boolean deadCellWith3AliveNeighbours(boolean cell, int nbOfLiveNeighbours) {
+        return (nbOfLiveNeighbours == 3) && !cell;
     }
 }

@@ -30,10 +30,10 @@ public class GameOfLifeTest {
     @Test
     public void anyLiveCellWithMoreThanThreeNeighbours_diesInNextGeneration() throws Exception {
         sut.alive(0, 0);
-        sut.alive(0,1);
-        sut.alive(1,1);
-        sut.alive(1,0);
-        sut.alive(1,2);
+        sut.alive(0, 1);
+        sut.alive(1, 1);
+        sut.alive(1, 0);
+        sut.alive(1, 2);
 
         boolean[][] cells = sut.nextGeneration();
 
@@ -56,6 +56,17 @@ public class GameOfLifeTest {
         sut.alive(0, 1);
         sut.alive(1, 0);
         sut.alive(1, 1);
+        sut.alive(1, 2);
+
+        boolean[][] cells = sut.nextGeneration();
+
+        assertThat(cells[1][1], is(true));
+    }
+
+    @Test
+    public void anyDeadCellWithExactlyThreeLiveNeighbours_becomeALiveCell() throws Exception {
+        sut.alive(0, 1);
+        sut.alive(1, 0);
         sut.alive(1, 2);
 
         boolean[][] cells = sut.nextGeneration();
