@@ -3,14 +3,23 @@ package gameoflife;
 import java.util.Arrays;
 
 public class GameOfLife {
-    private final boolean[][] cells;
+    private boolean[][] cells;
 
     public GameOfLife(int gridSize) {
         this.cells = new boolean[gridSize][gridSize];
     }
 
+    public GameOfLife(boolean [][]cells) {
+        this.cells = cells;
+    }
+
     public void alive(int x, int y) {
         cells[x][y] = true;
+    }
+
+    public boolean[][] nextGeneration(boolean [][]cells) {
+        this.cells = cells;
+        return nextGeneration();
     }
 
     public boolean[][] nextGeneration() {
