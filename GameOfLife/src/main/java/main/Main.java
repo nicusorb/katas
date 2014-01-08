@@ -1,4 +1,6 @@
-package gameoflife;
+package main;
+
+import gameoflife.GameOfLife;
 
 import java.io.IOException;
 import java.nio.charset.Charset;

@@ -17,6 +17,14 @@ public class GameOfLife {
         cells[x][y] = true;
     }
 
+    public void dead(int x, int y) {
+        cells[x][y] = false;
+    }
+
+    public boolean getCell(int row, int col) {
+        return cells[row][col];
+    }
+
     public boolean[][] nextGeneration(boolean [][]cells) {
         this.cells = cells;
         return nextGeneration();
@@ -37,7 +45,9 @@ public class GameOfLife {
                     newCells[i][j] = true;
             }
         }
-        return newCells;
+
+        this.cells = newCells;
+        return cells;
     }
 
     private boolean[][] cloneCells() {
