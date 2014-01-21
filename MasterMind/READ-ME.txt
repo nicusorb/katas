@@ -1,0 +1,37 @@
+Description copied from http://indiecode.net/2012/05/06/code-kata-mastermind/
+
+About This Kata:
+This problem was described in Uncle Bob’s Clean Coders video series during Episode 9: Single Responsibility Principle.
+As the title of the episode suggests, this code kata will practice the first of the SOLID principles, SRP.
+
+Problem Description:
+Mastermind is a two player board game which has a goal of breaking a code.
+The first player, the code maker, thinks of a 4 letter word using only the letters A through F.
+The second player, the code breaker, tries to guess the code maker’s code by offering a sequence of guesses.
+The code maker responds to each guess by offering specific clues.
+The clues are used by the code breaker to make further guesses until the code is broken.
+When the code is guessed, the number of tries is displayed to the user.
+
+Example of a round to explain the clues:
+
+-Code maker thinks of “DFCA”.
+-The code breaker guessed “ABCD”.
+-The code maker then responds with “–+”.
+
+The minus signs indicate two letters of the guess are part of the code, but are not in the correct position.
+The plus sign indicates one letter of the guess is part of the code and are in the correct position.
+
+Exercise:
+Please create an application that will act as a code breaker. It will start by outputting the code “AAAA”.
+The user will then score the code. Based on the score, the app will make an educated guess for the next iteration.
+The app will continue guessing until the code is broken.
+
+Make sure to figure out which parts of the application need to be separated from one another such that the components
+only work on one concern without affecting the other components.
+
+Please practice TDD and let a design emerge. First get the functionality to work, and then refactor and clean your code
+to separate concerns. Also, if possible, find another developer to practice pair programming so you can learn from each
+other and learn different ideas and techniques for solving the problem.
+
+Hints:
+Figure out who the actors are. This will help you figure out the responsibilities of your classes to create a loosely coupled design.
